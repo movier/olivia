@@ -1,0 +1,7 @@
+static:
+  image: nginx
+  ports:
+    - "8888:80"
+  volumes:
+    - ./nginx:/etc/nginx/conf.d
+    - ./:/usr/share/nginx/html

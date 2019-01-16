@@ -1,0 +1,19 @@
+doctype xml
+feed(xmlns='http://www.w3.org/2005/Atom')
+    title <![CDATA[Oliver Young]]>
+    subtitle <![CDATA[Hi, I’m Oliver and welcome to my personal website. I write about programming, travelling and lifeing here. Sometimes I also write about my cute baby.]]>
+    link(href='http://movier.me/feed.xml' rel='self')
+    link(href='http://movier.me/')
+    updated= new Date().toISOString().slice(0, -5) + 'Z'
+    id http://movier.me/
+
+    each feed, i in myFeeds
+        entry
+            title!= '<![CDATA[ ' + feed.title + ' ]]>'
+            link(href= 'http://movier.me/blog/' + feed.publishedAt.toISOString().substr(0, 4) + '/' + feed.url + '/')
+            author
+                name Oliver Young
+            updated= feed.updatedAt.toISOString().slice(0, -5) + 'Z'
+            published= feed.publishedAt.toISOString().slice(0, -5) + 'Z'
+            id= href= 'http://movier.me/blog/' + feed.publishedAt.toISOString().substr(0, 4) + '/' + feed.url + '/'
+            content(type="html" xml:base="http://movier.me/" xml:lang="en")!= '<![CDATA[' + feed.text + ']]>'

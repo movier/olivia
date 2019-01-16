@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Oliver Young</title>
+  <script src="lib/codemirror.js"></script>
+  <script src="lib/overlay.js"></script>
+  <script src="lib/markdown.js"></script>
+  <link rel="stylesheet" href="lib/codemirror.css">
+  <link href="https://fonts.googleapis.com/css?family=Droid+Serif" rel="stylesheet">
+  <link rel="stylesheet" href="/markdown.css">
+  <script src="lib/gfm.js"></script>
+  <script src="lib/javascript.js"></script>
+  <script src="lib/python.js"></script>
+  <script src="lib/clike.js"></script>
+  <script src="lib/swift.js"></script>
+  <script src="lib/meta.js"></script>
+  <style>
+    .container {
+      max-width: 700px;
+      margin: 60px auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <textarea id="my-textarea"></textarea>
+  </div>
+  <script>
+    const baseUrl = "http://localhost:1102/";
+    var parsedUrl = new URL(window.location.href);
+    var paramId = parsedUrl.searchParams.get("id");
+
+    var textarea = document.getElementById('my-textarea');
+
+    // only trigger autofocus when write a new post
+    if (!paramId) {
+      textarea.focus();
+    }
+
+    var cm = CodeMirror.fromTextArea(textarea, {
+      lineWrapping: true,
+    });
+
+    let id;
+    if (paramId) {
+      id = paramId;
+      fetch(baseUrl +'post-by-id/' + id, {
+        credentials: 'include',
+      })
+        .then(response => response.json())
+        .then(post => {
+          cm.setValue('# ' + post.title + '\n\n' + post.text)
+          
+          // set initial value as preview mode
+          const lineNumber = 0;
+          const lineContent = cm.getLine(lineNumber);
+          const wholeMatch = lineContent.match(/\*\w{1,}\*/g);
+          if (wholeMatch) {
+            wholeMatch.map(m => {
+              var from = lineContent.indexOf(m);
+              var to = from + m.length - 1;
+              const style = "display: none";
+              cm.markText({ line: lineNumber, ch: from }, { line: lineNumber, ch: from + 1 }, { css: style });
+              cm.markText({ line: lineNumber, ch: to }, { line: lineNumber, ch: to + 1 }, { css: style });
+            })
+          }
+          if (lineContent.substring(0, 2) === '# ') {
+            const style = "display: none";
+            cm.markText({ line: lineNumber, ch: 0 }, { line: lineNumber, ch: 2 }, { css: style })
+          }
+
+        });
+    } else {
+      fetch(baseUrl + 'post', {
+        method: 'post',
+        credentials: 'include',
+      })
+        .then(response => response.json())
+        .then(post => id = post._id);
+    }
+
+    cm.on('change', function (instance, changeObj) {
+      cm.save();
+      if (id) {
+        fetch(baseUrl + 'post/' + id, {
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          method: 'PATCH',
+          body: JSON.stringify({ text: cm.getValue() }),
+          credentials: 'include',
+        })
+        .then(response => response.json())
+        .then(post => console.log(post));
+      }
+    });
+
+    let lastCursor;
+    cm.on('cursorActivity', function () {
+      if (cm.getCursor().line === lastCursor && cm.hasFocus()) return;
+      lastCursor = cm.getCursor().line;
+      cm.eachLine(function (lineHandle) {
+        const lineNumber = cm.getLineNumber(lineHandle);
+        const lineContent = cm.getLine(lineNumber);
+        const wholeMatch = lineContent.match(/\*\w{1,}\*/g);
+        if (wholeMatch) {
+          wholeMatch.map(m => {
+            var from = lineContent.indexOf(m);
+            var to = from + m.length - 1;
+            const style = lineNumber === cm.getCursor().line ? "display: unset" : "display: none";
+            cm.markText({ line: lineNumber, ch: from }, { line: lineNumber, ch: from + 1 }, { css: style });
+            cm.markText({ line: lineNumber, ch: to }, { line: lineNumber, ch: to + 1 }, { css: style });
+          })
+        }
+
+        if (lineContent.substring(0, 2) === '# ') {
+          const style = lineNumber === cm.getCursor().line ? "display: unset" : "display: none";
+          cm.markText({ line: lineNumber, ch: 0 }, { line: lineNumber, ch: 2 }, { css: style })
+        }
+
+        const imageMatch = lineContent.match(/!\[(.*?)\]\((.*?)\)/);
+        if (imageMatch) {
+          const url = imageMatch[2];
+          const style1 = "display: block;height: 400px;background-image: url('" + url + "');background-repeat:no-repeat;background-position: center center;color: rgba(0, 0, 0, 0);";
+          const style2 = "display: inline;background-image: none;color: rgba(0, 0, 0, .86)";
+          const style = lineNumber === cm.getCursor().line ? style2 : style1;
+          cm.markText({ line: lineNumber, ch: 0 }, { line: lineNumber + 1, ch: 0 }, { css: style })
+        }
+
+      });
+    });
+    cm.on('blur', function () {
+      console.log('blur');
+    });
+    cm.on('focus', function () {
+      console.log('focus');
+    });
+  </script>
+</body>
+</html>
+
