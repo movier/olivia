@@ -4,6 +4,7 @@ services:
     build: ./backend
     volumes:
       - ./backend:/opt/app
+      - /opt/app/node_modules
     ports:
       - "1102:1102"
     links:
@@ -16,5 +17,6 @@ services:
     build: ./frontend
     volumes:
       - ./frontend:/opt/app
+      - /opt/app/node_modules
     ports:
       - "8080:8080"
