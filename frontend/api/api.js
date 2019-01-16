@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const url = "http://localhost:1102/"
+const url = `http://${document.location.hostname}:1102/`
 axios.defaults.withCredentials = true;
 
 export default { 
