@@ -23,7 +23,7 @@ var upload = multer({ storage: storage })
 var app = express()
 app.set('views', './views')
 app.set('view engine', 'pug')
-app.use(cors({ origin: ['http://localhost:8080', 'http://13.114.211.2'], credentials: true }))
+app.use(cors({ origin: ['http://localhost:8080', 'http://35.194.101.45:8080'], credentials: true }))
 app.use(bodyParser.json())
 
 app.get('/', function(req, res) {
