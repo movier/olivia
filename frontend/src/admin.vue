@@ -81,7 +81,7 @@ export default {
 .write-button-container {
   max-width: 700px;
   margin: 0 auto;
-  margin-top: 60px;
+  margin-top: 80px;
   text-align: right;
 }
 .button {
