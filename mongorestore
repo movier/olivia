@@ -1,2 +1,2 @@
 #!/bin/sh
-docker run --rm -it --net olivia_default --link olivia_mongo_1:mongo -v ~/Code/olivia/olivia-server:/backup mongo mongorestore --host mongo --db olivia-server --drop /backup
+docker run --rm -it --net olivia_default --link olivia_mongo_1:mongo -v $(pwd)/olivia-server:/backup mongo mongorestore --host mongo --db olivia-server --drop /backup

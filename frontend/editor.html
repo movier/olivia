@@ -29,7 +29,7 @@
     <textarea id="my-textarea"></textarea>
   </div>
   <script>
-    const baseUrl = "http://localhost:1102/";
+    const baseUrl = `http://${document.location.hostname}:1102/`; 
     var parsedUrl = new URL(window.location.href);
     var paramId = parsedUrl.searchParams.get("id");
 
