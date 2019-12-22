@@ -1,1 +1,1 @@
-{"options":{},"indexes":[{"v":1,"key":{"_id":1},"name":"_id_","ns":"olivia-server.posts"}]}
+{"options":{},"indexes":[{"v":2,"key":{"_id":1},"name":"_id_","ns":"olivia-server.posts"}],"uuid":"c9ca1aa5eef0440b9c3273fa40d0f075"}
