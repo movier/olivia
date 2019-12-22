@@ -2,7 +2,7 @@
   <div>
     <div id="header">
       <img src="/Rectangle.png" />
-      <h1>XIAOMING YANG</h1>
+      <h1>Oliver Yang</h1>
       <p>Hi, welcome to my personal website. I write about programming, travelling and lifeing here. Sometimes I also write about my cute baby.</p>
     </div>
     <div class="divider"></div>
