@@ -1,10 +1,10 @@
 <template lang="html">
-  <div id="nav">
+  <div id="nav" v-if="currentRoutePath !== '/'">
     <!-- <div class="nav-left">
       <div class="nav-item"><router-link to="/blog">BLOG</router-link></div>
       <div class="nav-item"><router-link to="/projects">PROJECTS</router-link></div>
     </div> -->
-    <div style="margin: auto">
+    <div style="margin: auto" >
       <router-link to="/"><img height="26" id="logo" src="/logo.svg" /></router-link>
     </div>
     <!-- <div class="nav-right">
@@ -14,6 +14,16 @@
     <!-- <p id="social-media"><a href="https://twitter.com/olimovier">Twitter</a> / <a href="https://www.instagram.com/olimovier/">Instagram</a> / <a href="/feed.xml">RSS</a></p> -->
   </div>
 </template>
+
+<script>
+export default {
+  computed: {
+    currentRoutePath() {
+      return this.$route.fullPath;
+    }
+  },
+}
+</script>
 
 <style lang="css">
   #nav a {
