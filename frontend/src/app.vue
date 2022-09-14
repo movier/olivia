@@ -2,7 +2,7 @@
   <div>
     <div id="header">
       <img src="/Rectangle.png" />
-      <h1>Oliver Young</h1>
+      <h1>Oli Movie R</h1>
       <p>Hi, I’m Oliver and welcome to my personal website. I write about programming, travelling and lifeing here. Sometimes I also write about my cute baby.</p>
     </div>
     <div class="divider"></div>

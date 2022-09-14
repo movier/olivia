@@ -1,19 +1,19 @@
 doctype xml
 feed(xmlns='http://www.w3.org/2005/Atom')
-    title <![CDATA[Oliver Young]]>
-    subtitle <![CDATA[Hi, I’m Oliver and welcome to my personal website. I write about programming, travelling and lifeing here. Sometimes I also write about my cute baby.]]>
-    link(href='http://movier.me/feed.xml' rel='self')
-    link(href='http://movier.me/')
+    title <![CDATA[Oli Movie R]]>
+    subtitle <![CDATA[Hi, I’m Oliver and welcome to my personal website. I write about programming, travelling and life here.]]>
+    link(href='https://olimovier.com/feed.xml' rel='self')
+    link(href='https://olimovier.com/')
     updated= new Date().toISOString().slice(0, -5) + 'Z'
-    id http://movier.me/
+    id https://olimovier.com/
 
     each feed, i in myFeeds
         entry
             title!= '<![CDATA[ ' + feed.title + ' ]]>'
-            link(href= 'http://movier.me/blog/' + feed.publishedAt.toISOString().substr(0, 4) + '/' + feed.url + '/')
+            link(href= 'https://olimovier.com/blog/' + feed.publishedAt.toISOString().substr(0, 4) + '/' + feed.url + '/')
             author
-                name Oliver Young
+                name Oli Movie R
             updated= feed.updatedAt.toISOString().slice(0, -5) + 'Z'
             published= feed.publishedAt.toISOString().slice(0, -5) + 'Z'
-            id= href= 'http://movier.me/blog/' + feed.publishedAt.toISOString().substr(0, 4) + '/' + feed.url + '/'
-            content(type="html" xml:base="http://movier.me/" xml:lang="en")!= '<![CDATA[' + feed.text + ']]>'
+            id= href= 'https://olimovier.com/blog/' + feed.publishedAt.toISOString().substr(0, 4) + '/' + feed.url + '/'
+            content(type="html" xml:base="https://olimovier.com/" xml:lang="en")!= '<![CDATA[' + feed.text + ']]>'

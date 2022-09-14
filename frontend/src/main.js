@@ -50,11 +50,11 @@ new Vue({
   components: { myNav },
   template: `
     <div id="app">
-    <my-nav></my-nav>
+      <my-nav></my-nav>
       <transition name="fade">
-      <router-view class="view"></router-view>
+        <router-view class="view"></router-view>
       </transition>
-      <p class="copyright">Copyright © 2017 MOVIER.ME - All Rights Reserved.</p>
+      <p class="copyright">Copyright © 2022 olimovier.com - All Rights Reserved.</p>
     </div>
   `
 }).$mount('#app')
