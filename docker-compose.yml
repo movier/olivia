@@ -10,7 +10,7 @@ services:
     links:
       - mongo
   mongo:
-    image: mongo
+    image: mongo:4.2.21
     ports:
       - "27017:27017"
   frontend:
