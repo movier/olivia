@@ -1,9 +1,9 @@
 <template lang="html">
   <div>
     <div id="header">
-      <img src="/Rectangle.png" />
+      <img src="/avatar.jpg" style="width: 200px;border-radius: 50%;" />
       <h1>Oli Movie R</h1>
-      <p>Hi, welcome to my personal website. I write about programming, travelling and life here.</p>
+      <div>Hi, there, I'm Oliver. Welcome to my personal website. <br>I write about programming, travelling and life here.</div>
     </div>
     <div class="divider"></div>
     <ul id="post-list">
@@ -61,7 +61,8 @@ body {
   letter-spacing: normal;
 }
 
-#header p {
+#header div {
+  margin-top: 20px;
   font-size: 22px;
   color: #A9A9A9;
   -webkit-font-smoothing: antialiased;

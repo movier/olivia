@@ -5,7 +5,7 @@
       <div class="nav-item"><router-link to="/projects">PROJECTS</router-link></div>
     </div> -->
     <div style="margin: auto" >
-      <router-link to="/"><img height="26" id="logo" src="/logo.svg" /></router-link>
+      <router-link to="/"><img height="32" id="logo" src="/avatar.jpg" style="border-radius: 50%;"/></router-link>
     </div>
     <!-- <div class="nav-right">
       <div class="nav-item"><router-link to="/about">ABOUT</router-link></div>
