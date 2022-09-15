@@ -21,6 +21,7 @@
       </p>
       <p class="category-and-tags">
         <a v-if="!post.isPublished" class="operation" v-on:click="publish(post._id)">发布</a>
+        <a v-if="post.isPublished" class="operation" v-on:click="unpublish(post._id)">取消发布</a>
         <a class="operation" v-on:click="deletePost(post._id)">删除</a></p>
       <div class="divider post-list-divider"></div>
   </div>
@@ -50,10 +51,15 @@ export default {
       }
       api.updatePost(this.post._id, this.post);
     },
-    publish: function (id) {
+    publish: function () {
       const url = window.prompt('Please edit your post url', this.post.title.toLowerCase().split(' ').join('-')); 
       if (url) {
         api.publishPost(this.post._id, { url });
+      }
+    },
+    unpublish: function () {
+      if (confirm('Are you sure to unpublish this post?')) {  
+        api.unpublishPost(this.post._id);
       }
     },
   }

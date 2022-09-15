@@ -98,6 +98,16 @@ app.patch('/post/publish/:id', function (req, res) {
     .catch(error => res.send(error));
 });
 
+app.patch('/post/unpublish/:id', function (req, res) {
+  Post.findOneAndUpdate(
+    { _id: req.params.id },
+    { isPublished: false },
+    { new: true }
+  )
+    .then(post => res.json(post))
+    .catch(error => res.send(error));
+});
+
 // curl -X PATCH --data '{"text":"Test with CURL PatchAA"}' --header "Content-Type:application/json" http://localhost:1102/post/59c72238acaf920309cdc1c1
 app.patch('/post/:id', function (req, res) {
 

@@ -46,4 +46,8 @@ export default {
     axios.patch(url + 'post/publish/' + id, body);
   },
 
+  unpublishPost (id) {
+    axios.patch(url + 'post/unpublish/' + id);
+  },
+
 }
