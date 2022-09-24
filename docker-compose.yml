@@ -11,6 +11,7 @@ services:
       - mongo
     restart: on-failure:10
   mongo:
+    container_name: olivia_mongo_1
     image: mongo:4.2.21
     ports:
       - "27017:27017"
