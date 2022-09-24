@@ -9,6 +9,7 @@ services:
       - "1102:1102"
     links:
       - mongo
+    restart: on-failure:10
   mongo:
     image: mongo:4.2.21
     ports:
